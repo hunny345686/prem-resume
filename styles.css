@@ -19,6 +19,7 @@
 }
 
 html {
+  min-height: 100%;
   background:
     radial-gradient(circle at top left, rgba(68, 234, 220, 0.12), transparent 32rem),
     radial-gradient(circle at bottom right, rgba(245, 193, 108, 0.1), transparent 34rem),
@@ -44,6 +45,11 @@ a:hover {
   color: var(--accent);
 }
 
+a:focus-visible {
+  outline: 2px solid var(--warm);
+  outline-offset: 4px;
+}
+
 h1,
 h2,
 h3,
@@ -56,7 +62,7 @@ p {
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 12px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(11, 18, 32, 0.98));
   box-shadow: var(--shadow);
 }
@@ -65,7 +71,7 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(310px, 0.85fr);
   gap: 28px;
-  padding: 42px 46px 34px;
+  padding: 16px;
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(115deg, rgba(68, 234, 220, 0.14), transparent 42%),
@@ -98,9 +104,9 @@ p {
 }
 
 h1 {
-  margin-bottom: 13px;
+  margin-bottom: 8px;
   color: var(--text);
-  font-size: 4.05rem;
+  font-size: 2.5rem;
   line-height: 0.96;
   letter-spacing: 0;
 }
@@ -120,13 +126,13 @@ h1 {
   margin: 0;
   padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.045);
   font-style: normal;
 }
 
 .contact a,
-.contact > span {
+.contact>span {
   display: flex;
   min-width: 0;
   align-items: center;
@@ -147,8 +153,7 @@ h1 {
   stroke-width: 1.85;
 }
 
-.contact .icon,
-h2 .icon {
+.contact .icon {
   color: var(--accent);
 }
 
@@ -180,8 +185,40 @@ h2 .icon {
   font-size: 0.84rem;
 }
 
+.role-fit {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(68, 234, 220, 0.045);
+}
+
+.role-fit div {
+  padding: 16px 46px;
+}
+
+.role-fit div:first-child {
+  border-right: 1px solid var(--line);
+}
+
+.role-fit span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--warm);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.role-fit strong {
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
 .section {
-  padding: 28px 46px;
+  padding: 20px 16px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -193,7 +230,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: var(--accent);
   font-size: 1rem;
   letter-spacing: 0;
@@ -208,7 +245,6 @@ h2::after {
 }
 
 .section p,
-.skill-list p,
 .job p,
 .lower-grid p {
   margin-bottom: 8px;
@@ -221,7 +257,6 @@ h2::after {
 }
 
 .summary p {
-  max-width: 930px;
   font-size: 1.06rem;
 }
 
@@ -234,9 +269,9 @@ h2::after {
 .skill-card {
   position: relative;
   overflow: hidden;
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(68, 234, 220, 0.08), transparent 45%),
     rgba(255, 255, 255, 0.035);
@@ -276,7 +311,8 @@ h2::after {
   font-size: 1rem;
 }
 
-.tag-list {
+.tag-list,
+.learning-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -285,7 +321,8 @@ h2::after {
   list-style: none;
 }
 
-.tag-list li {
+.tag-list li,
+.learning-list li {
   margin: 0;
   padding: 5px 9px;
   border: 1px solid rgba(226, 232, 240, 0.18);
@@ -296,9 +333,13 @@ h2::after {
   line-height: 1.2;
 }
 
+.learning-list li {
+  border-color: rgba(245, 193, 108, 0.26);
+}
+
 .job {
   position: relative;
-  padding: 22px 0 22px 22px;
+  padding: 10px 0 10px 22px;
   border-left: 1px solid rgba(68, 234, 220, 0.38);
 }
 
@@ -370,16 +411,6 @@ li::marker {
   color: var(--warm);
 }
 
-.note {
-  margin: 10px 0 0;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.035);
-  color: var(--muted);
-  font-style: italic;
-}
-
 .lower-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
@@ -394,7 +425,7 @@ li::marker {
 .project-card {
   padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background:
     linear-gradient(135deg, rgba(245, 193, 108, 0.09), transparent 44%),
     rgba(255, 255, 255, 0.035);
@@ -441,7 +472,7 @@ li::marker {
 .education-panel {
   padding: 18px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -457,19 +488,26 @@ li::marker {
 
   .hero,
   .impact,
+  .role-fit,
   .skills-showcase,
   .lower-grid {
     grid-template-columns: 1fr;
   }
 
   .hero,
-  .section {
+  .section,
+  .role-fit div {
     padding-left: 24px;
     padding-right: 24px;
   }
 
+  .role-fit div:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
   h1 {
-    font-size: 3rem;
+    font-size: 2.85rem;
   }
 
   .impact div {
@@ -477,12 +515,14 @@ li::marker {
     border-bottom: 1px solid var(--line);
   }
 
-  .job-head {
+  .job-head,
+  .project-head {
     display: block;
   }
 
-  .job-head span {
-    display: block;
+  .job-head span,
+  .project-head span {
+    display: inline-block;
     margin-top: 3px;
     text-align: left;
   }
@@ -491,15 +531,17 @@ li::marker {
 @media print {
   @page {
     size: A4;
-    margin: 0;
+    margin: 9mm;
   }
 
   html,
   body {
-    width: 210mm;
-    height: 297mm;
-    background: #0f172a;
-    font-size: 9.1pt;
+    width: auto;
+    min-height: auto;
+    background: #ffffff;
+    color: #111827;
+    font-size: 8.8pt;
+    line-height: 1.34;
   }
 
   body {
@@ -507,51 +549,190 @@ li::marker {
   }
 
   a {
+    color: #111827;
     text-decoration: none;
   }
 
   .resume {
-    width: 210mm;
-    min-height: 297mm;
+    width: 100%;
     border: 0;
     border-radius: 0;
+    background: #ffffff;
     box-shadow: none;
   }
 
+  .hero,
+  .role-fit,
+  .impact div,
+  .contact,
+  .skill-card,
+  .project-card,
+  .education-panel {
+    background: #ffffff;
+  }
+
   .hero {
-    padding: 8mm 10mm 5mm;
-    grid-template-columns: 1.12fr 0.88fr;
+    padding: 0 0 4mm;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 7mm;
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .hero-copy {
+    padding-left: 0;
+  }
+
+  .hero-copy::before,
+  .skill-card::before {
+    display: none;
+  }
+
+  .eyebrow,
+  h2,
+  .contact .icon {
+    color: #0f766e;
+  }
+
+  h1,
+  h3,
+  .section strong,
+  .impact strong,
+  .role-fit strong,
+  .skill-card h3,
+  .project-head h3 {
+    color: #111827;
   }
 
   h1 {
-    font-size: 30pt;
+    margin-bottom: 2mm;
+    font-size: 26pt;
   }
 
-  .headline {
-    font-size: 9.5pt;
+  .headline,
+  .section p,
+  .job p,
+  .lower-grid p,
+  li,
+  .contact a,
+  .contact>span,
+  .impact span,
+  .job-head span,
+  .tag-list li,
+  .learning-list li {
+    color: #374151;
+  }
+
+  .headline,
+  .summary p {
+    font-size: 9.1pt;
   }
 
   .contact {
-    padding: 3.5mm;
+    padding: 0;
+    border: 0;
+    gap: 1.4mm;
+  }
+
+  .contact a,
+  .contact>span {
+    font-size: 8.4pt;
+  }
+
+  .impact {
+    border-bottom: 1px solid #d1d5db;
   }
 
   .impact div {
-    padding: 3.5mm 5mm;
+    padding: 2.8mm 3mm;
+    border-color: #d1d5db;
+  }
+
+  .role-fit {
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  .role-fit div {
+    padding: 3mm 0;
+  }
+
+  .role-fit div:first-child {
+    padding-right: 5mm;
+    border-color: #d1d5db;
+  }
+
+  .role-fit div:last-child {
+    padding-left: 5mm;
+  }
+
+  .role-fit span,
+  .job-head p,
+  .project-head span {
+    color: #92400e;
   }
 
   .section {
-    padding: 4.1mm 10mm;
+    padding: 3.2mm 0;
+    border-bottom: 1px solid #d1d5db;
+  }
+
+  h2 {
+    margin-bottom: 2.4mm;
+    font-size: 8.4pt;
+  }
+
+  h2::after {
+    background: #d1d5db;
+  }
+
+  .skills-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5mm;
   }
 
   .skill-card,
-  .project-card {
-    padding: 2.4mm 3mm;
+  .project-card,
+  .education-panel {
+    padding: 2.3mm;
+    border-color: #d1d5db;
+  }
+
+  .tag-list li,
+  .learning-list li {
+    padding: 1.1mm 1.8mm;
+    border-color: #d1d5db;
+    background: #f9fafb;
+    font-size: 7.6pt;
   }
 
   .job {
     break-inside: avoid;
-    padding-top: 3.2mm;
-    padding-bottom: 3.2mm;
+    padding: 2.6mm 0 2.6mm 4mm;
+    border-left-color: #0f766e;
+  }
+
+  .job::before {
+    background: #0f766e;
+  }
+
+  .job h3 {
+    font-size: 9.4pt;
+  }
+
+  .job-head {
+    margin-bottom: 1.4mm;
+  }
+
+  li {
+    margin-bottom: 1.2mm;
+    font-size: 8.4pt;
+  }
+
+  .lower-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 5mm;
+  }
+
+  .project-card li {
+    font-size: 8pt;
   }
 }
