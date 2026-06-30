@@ -157,6 +157,10 @@ h1 {
   color: var(--accent);
 }
 
+.print-only {
+  display: none;
+}
+
 .impact {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -340,18 +344,18 @@ h2::after {
 .job {
   position: relative;
   padding: 10px 0 10px 22px;
-  border-left: 1px solid rgba(68, 234, 220, 0.38);
+  /* border-left: 1px solid rgba(68, 234, 220, 0.38); */
 }
 
 .job::before {
-  content: "";
+  /* content: "";
   position: absolute;
   left: -5px;
   top: 28px;
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--accent); */
 }
 
 .job:first-of-type {
@@ -419,6 +423,7 @@ li::marker {
 
 .project-cards {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
 }
 
@@ -455,9 +460,20 @@ li::marker {
   font-weight: 800;
 }
 
-.project-stack {
+.project-stack,
+.project-link {
   margin-bottom: 10px;
   color: var(--muted);
+}
+
+.project-link {
+  margin-top: -4px;
+}
+
+.project-link a,
+.project-stack a {
+  color: var(--body);
+  text-decoration-color: rgba(68, 234, 220, 0.55);
 }
 
 .project-card ul {
@@ -531,33 +547,80 @@ li::marker {
 @media print {
   @page {
     size: A4;
-    margin: 9mm;
+    margin: 6mm;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
 
   html,
   body {
     width: auto;
     min-height: auto;
-    background: #ffffff;
+    background: #ffffff !important;
     color: #111827;
     font-size: 8.8pt;
-    line-height: 1.34;
+    line-height: 1.28;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   body {
+    margin: 0;
     padding: 0;
   }
 
   a {
     color: #111827;
     text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
+  }
+
+  h2,
+  h3,
+  .job-head,
+  .project-head,
+  .skill-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .hero,
+  .skill-card,
+  .project-card,
+  .education-panel,
+  .current-focus,
+  .lower-grid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .screen-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: inline !important;
   }
 
   .resume {
     width: 100%;
+    max-width: none;
+    margin: 0;
+    overflow: visible;
     border: 0;
     border-radius: 0;
-    background: #ffffff;
+    background: #ffffff !important;
     box-shadow: none;
   }
 
@@ -568,14 +631,16 @@ li::marker {
   .skill-card,
   .project-card,
   .education-panel {
-    background: #ffffff;
+    background: #ffffff !important;
   }
 
   .hero {
-    padding: 0 0 4mm;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 7mm;
-    border-bottom: 1px solid #d1d5db;
+    align-items: start;
+    grid-template-columns: minmax(0, 1.18fr) minmax(45mm, 0.82fr);
+    gap: 4.5mm;
+    justify-content: stretch;
+    padding: 0 0 2.2mm;
+    border-bottom: 1px solid #cbd5e1;
   }
 
   .hero-copy {
@@ -604,8 +669,15 @@ li::marker {
   }
 
   h1 {
-    margin-bottom: 2mm;
-    font-size: 26pt;
+    margin-bottom: 1.2mm;
+    font-size: 24.5pt;
+    line-height: 1;
+  }
+
+  .eyebrow {
+    margin-bottom: 1.1mm;
+    font-size: 7.5pt;
+    line-height: 1.2;
   }
 
   .headline,
@@ -624,18 +696,28 @@ li::marker {
 
   .headline,
   .summary p {
-    font-size: 9.1pt;
+    font-size: 8.8pt;
   }
 
   .contact {
     padding: 0;
     border: 0;
-    gap: 1.4mm;
+    gap: 0.8mm;
+    align-content: start;
   }
 
   .contact a,
   .contact>span {
-    font-size: 8.4pt;
+    gap: 1.2mm;
+    font-size: 8pt;
+    line-height: 1.2;
+  }
+
+  .icon {
+    width: 8pt;
+    height: 8pt;
+    flex-basis: 8pt;
+    stroke-width: 2;
   }
 
   .impact {
@@ -671,13 +753,14 @@ li::marker {
   }
 
   .section {
-    padding: 3.2mm 0;
-    border-bottom: 1px solid #d1d5db;
+    padding: 1.9mm 0;
+    border-bottom: 1px solid #e5e7eb;
   }
 
   h2 {
-    margin-bottom: 2.4mm;
-    font-size: 8.4pt;
+    margin-bottom: 1.35mm;
+    font-size: 8pt;
+    line-height: 1.1;
   }
 
   h2::after {
@@ -686,53 +769,148 @@ li::marker {
 
   .skills-showcase {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.5mm;
+    gap: 1.4mm;
   }
 
   .skill-card,
   .project-card,
   .education-panel {
-    padding: 2.3mm;
+    padding: 1.4mm;
     border-color: #d1d5db;
+    border-radius: 1.4mm;
+  }
+
+  .skill-heading {
+    gap: 1.3mm;
+    margin-bottom: 1.1mm;
+  }
+
+  .skill-mark {
+    width: auto;
+    height: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0f766e;
+    font-size: 7pt;
+    line-height: 1;
+  }
+
+  .skill-card h3 {
+    font-size: 8.3pt;
+  }
+
+  .tag-list,
+  .learning-list {
+    gap: 0.8mm 1mm;
   }
 
   .tag-list li,
   .learning-list li {
-    padding: 1.1mm 1.8mm;
+    padding: 0.45mm 1mm;
     border-color: #d1d5db;
-    background: #f9fafb;
-    font-size: 7.6pt;
+    background: #f8fafc;
+    font-size: 7pt;
+    line-height: 1.15;
   }
 
   .job {
     break-inside: avoid;
-    padding: 2.6mm 0 2.6mm 4mm;
-    border-left-color: #0f766e;
+    page-break-inside: avoid;
+    padding: 1.35mm 0 1.35mm 2.5mm;
+    border-left: 1px solid #d1d5db;
   }
 
-  .job::before {
-    background: #0f766e;
+  .job:first-of-type {
+    padding-top: 0;
   }
 
   .job h3 {
-    font-size: 9.4pt;
+    color: #111827 !important;
+    font-size: 9pt;
+    font-weight: 800;
   }
 
   .job-head {
-    margin-bottom: 1.4mm;
+    display: flex;
+    gap: 3.5mm;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1mm;
+  }
+
+  .job-head p {
+    color: #78350f !important;
+    font-size: 8.2pt;
+  }
+
+  .job-head span {
+    color: #1f2937 !important;
+    font-size: 8pt;
   }
 
   li {
-    margin-bottom: 1.2mm;
-    font-size: 8.4pt;
+    margin-bottom: 0.65mm;
+    font-size: 8.2pt;
+  }
+
+  ul {
+    padding-left: 3.2mm;
   }
 
   .lower-grid {
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 5mm;
+    align-items: start;
+    grid-template-columns: minmax(0, 1.28fr) minmax(43mm, 0.72fr);
+    gap: 2.8mm;
+  }
+
+  .project-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4mm;
+  }
+
+  .project-head {
+    gap: 2mm;
+    margin-bottom: 0.8mm;
+  }
+
+  .project-head h3 {
+    font-size: 8.4pt;
+  }
+
+  .project-head span {
+    padding: 0.25mm 0.9mm;
+    font-size: 6.9pt;
+  }
+
+  .project-stack,
+  .project-link {
+    margin-bottom: 0.8mm;
+    font-size: 7.7pt;
+  }
+
+  .project-link {
+    margin-top: -0.35mm;
+  }
+
+  .project-stack a,
+  .project-link a {
+    color: #111827;
   }
 
   .project-card li {
+    margin-bottom: 0.55mm;
+    font-size: 7.7pt;
+  }
+
+  .education-panel p {
+    margin-bottom: 1mm;
     font-size: 8pt;
+  }
+
+  .education-panel p:last-child,
+  .project-card li:last-child,
+  .job li:last-child {
+    margin-bottom: 0;
   }
 }
