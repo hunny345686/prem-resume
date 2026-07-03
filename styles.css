@@ -708,14 +708,14 @@ li::marker {
 
   .contact a,
   .contact>span {
-    gap: 1.2mm;
-    font-size: 8pt;
-    line-height: 1.2;
+    gap: 1.5mm;
+    font-size: 10pt;
+    line-height: 1.4;
   }
 
   .icon {
-    width: 8pt;
-    height: 8pt;
+    width: 10pt;
+    height: 10pt;
     flex-basis: 8pt;
     stroke-width: 2;
   }
@@ -802,7 +802,7 @@ li::marker {
 
   .tag-list,
   .learning-list {
-    gap: 0.8mm 1mm;
+    gap: 1.5mm 1.5mm;
   }
 
   .tag-list li,
